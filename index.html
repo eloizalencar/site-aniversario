@@ -7,32 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --lilás-claro: #fbebf3; /* Mais puxado para o rosa bebê quente */
+            --lilás-claro: #fbebf3; 
             --lilás-medio: #e8bdeb;
-            --lilás-escuro: #880e4f; /* Um roxo/rosa bem mais profundo e quente */
+            --lilás-escuro: #880e4f; 
             --lavanda: #ce93d8;
-            --estrela-cor: #ff80ab; /* Estrelas mais vivas */
+            --estrela-cor: #ff80ab; 
         }
 
         body { 
             font-family: 'Quicksand', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            /* Fundo degradê quente e aconchegante em vez de branco frio */
+            margin: 0; padding: 0; 
             background: linear-gradient(135deg, #fff0f5 0%, #f3e5f5 100%); 
-            color: #4a148c; 
-            overflow-x: hidden; 
-            position: relative; 
+            color: #4a148c; overflow-x: hidden; position: relative; 
         }
 
-        /* --- CORAÇÕES FLUTUANTES NO FUNDO --- */
-        .coracao {
-            position: absolute;
-            font-size: 1.5rem;
-            color: rgba(216, 27, 96, 0.15); /* Corações rosinhas bem suaves */
-            animation: flutuar 12s linear infinite;
-            z-index: 0;
-        }
+        /* Corações Flutuantes */
+        .coracao { position: absolute; font-size: 1.5rem; color: rgba(216, 27, 96, 0.15); animation: flutuar 12s linear infinite; z-index: 0; }
         @keyframes flutuar {
             0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
             10% { opacity: 1; }
@@ -47,42 +37,28 @@
         .coracao:nth-child(6) { left: 20%; animation-duration: 13s; animation-delay: 5s; }
         .coracao:nth-child(7) { left: 80%; animation-duration: 17s; animation-delay: 6s; font-size: 3rem; }
 
-        /* --- ESTRELAS CADENTES APRIMORADAS --- */
+        /* Estrelas Cadentes */
         @keyframes estrelaCadente {
             0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
             100% { transform: translateX(-1200px) translateY(1200px) rotate(-45deg); opacity: 0; }
         }
-
         .estrela {
-            position: absolute;
-            width: 6px; height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            /* Brilho super forte roxo/rosa em volta da estrela */
+            position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%;
             box-shadow: 0 0 15px 4px var(--estrela-cor), 0 0 30px 10px rgba(206, 147, 216, 0.6);
-            opacity: 0;
-            animation: estrelaCadente 3.5s linear infinite;
-            z-index: 0; 
+            opacity: 0; animation: estrelaCadente 3.5s linear infinite; z-index: 0; 
         }
-        /* Cauda da Estrela */
         .estrela::before {
-            content: '';
-            position: absolute;
-            top: 50%; transform: translateY(-50%);
-            width: 70px; height: 2px;
-            background: linear-gradient(90deg, #fff, transparent);
+            content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+            width: 70px; height: 2px; background: linear-gradient(90deg, #fff, transparent);
         }
-
         .estrela:nth-child(8) { top: 5%; left: 90%; animation-delay: 0s; }
         .estrela:nth-child(9) { top: 25%; left: 80%; animation-delay: 1.2s; animation-duration: 2.5s; }
         .estrela:nth-child(10) { top: 45%; left: 95%; animation-delay: 2.5s; animation-duration: 4s;}
         .estrela:nth-child(11) { top: 65%; left: 85%; animation-delay: 0.5s; animation-duration: 3s; }
         .estrela:nth-child(12) { top: 15%; left: 70%; animation-delay: 1.8s; }
         .estrela:nth-child(13) { top: 35%; left: 60%; animation-delay: 2.8s; animation-duration: 5s; }
-        .estrela:nth-child(14) { top: 55%; left: 50%; animation-delay: 1.5s; }
-        .estrela:nth-child(15) { top: 85%; left: 40%; animation-delay: 2.2s; animation-duration: 4.5s; }
 
-        /* Capa Gigante (Deixei o filtro um pouco mais quente) */
+        /* Capa Gigante */
         .capa { 
             height: 100vh; width: 100%;
             background: linear-gradient(rgba(136, 14, 79, 0.3), rgba(74, 20, 140, 0.4)), url('capa.jpeg'); 
@@ -93,20 +69,41 @@
         .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(4rem, 12vw, 7rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
         .capa p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
 
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(206, 147, 216, 0.3); }
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(206, 147, 216, 0.3); }
 
-        /* Galeria para 16 Fotos (Bordas mais arredondadas e sombras quentes) */
+        /* --- CRONOGRAMA INTERATIVO --- */
+        .checklist-card {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+            padding: 30px 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1);
+            text-align: left; max-width: 650px; margin: 0 auto; border-left: 10px solid var(--lilás-escuro);
+        }
+        .check-container {
+            display: block; position: relative; padding-left: 40px; margin-bottom: 18px;
+            cursor: pointer; font-size: 1.2rem; color: #5a189a; font-weight: 600; transition: 0.3s;
+        }
+        .check-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .checkmark {
+            position: absolute; top: 0; left: 0; height: 26px; width: 26px;
+            background-color: #fff; border: 3px solid var(--lavanda); border-radius: 8px; transition: 0.3s;
+        }
+        .check-container:hover input ~ .checkmark { background-color: var(--lilás-claro); }
+        .check-container input:checked ~ .checkmark { background-color: var(--lilás-escuro); border-color: var(--lilás-escuro); }
+        .checkmark:after { content: ""; position: absolute; display: none; }
+        .check-container input:checked ~ .checkmark:after { display: block; }
+        .check-container .checkmark:after { left: 8px; top: 3px; width: 6px; height: 12px; border: solid white; border-width: 0 3px 3px 0; transform: rotate(45deg); }
+        /* Efeito de riscar o texto */
+        .check-container input:checked ~ .texto-tarefa { text-decoration: line-through; color: #b39ddb; font-style: italic; }
+
+        /* Galeria e outros elementos */
         .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
         .galeria img { width: 100%; height: 300px; object-fit: cover; border-radius: 20px; border: 5px solid white; box-shadow: 0 12px 25px rgba(136, 14, 79, 0.15); transition: all 0.4s; }
         .galeria img:hover { transform: scale(1.05) translateY(-5px); z-index: 2; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.25); }
 
-        /* Estilo dos Cards (Translucidez e sombra romântica) */
-        .card-amor { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1); text-align: left; border-left: 10px solid var(--lavanda); max-width: 700px; margin: 0 auto; }
+        .card-amor { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1); text-align: left; border-left: 10px solid var(--lavanda); max-width: 800px; margin: 0 auto; }
         .card-amor li { font-size: 1.2rem; margin-bottom: 15px; list-style: none; display: flex; align-items: center; color: #5a189a; }
         .card-amor li::before { content: '💖'; margin-right: 15px; font-size: 1.5rem; }
 
-        /* Envelope Interativo */
         .envelope-wrapper { margin: 50px 0; perspective: 1000px; }
         .envelope { width: 320px; height: 220px; background: var(--lilás-medio); margin: auto; position: relative; cursor: pointer; border-radius: 0 0 15px 15px; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.2); }
         .envelope::before { content: ''; position: absolute; top: 0; left: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-top: 110px solid var(--lavanda); transform-origin: top; transition: transform 0.6s; z-index: 2; }
@@ -117,37 +114,14 @@
         .qr-section img { width: 250px; border: 8px solid white; border-radius: 20px; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.15); transition: transform 0.3s; }
         .qr-section img:hover { transform: scale(1.05); }
 
-        /* Áudio Customizado */
         audio { margin-top: 20px; outline: none; border-radius: 30px; box-shadow: 0 8px 25px rgba(216, 27, 96, 0.15); }
-
-        /* Efeito de hover na caixa surpresa */
         .caixa-container { cursor: pointer; transition: transform 0.3s; margin: 20px auto; display: inline-block; animation: pulsarCaixa 2s infinite; }
-        @keyframes pulsarCaixa {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
+        @keyframes pulsarCaixa { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
-        /* --- ESTILOS DO POP-UP (MODAL) --- */
-        .modal {
-            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(74, 20, 140, 0.6); backdrop-filter: blur(5px);
-            justify-content: center; align-items: center;
-        }
-        .modal-conteudo {
-            background-color: var(--lilás-claro); padding: 40px; border-radius: 25px;
-            max-width: 90%; max-height: 90vh; overflow-y: auto; position: relative;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center;
-            animation: abrirPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes abrirPopUp {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .fechar-modal {
-            position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro);
-            font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(74, 20, 140, 0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+        .modal-conteudo { background-color: var(--lilás-claro); padding: 40px; border-radius: 25px; max-width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; animation: abrirPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes abrirPopUp { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .fechar-modal:hover { color: #d81b60; transform: scale(1.2) rotate(90deg); }
         .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
         
@@ -157,15 +131,62 @@
 
     <div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
     <div class="coracao">✨</div><div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
-
     <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
     <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
-    <div class="estrela"></div><div class="estrela"></div>
 
     <header class="capa">
         <h1>Feliz Aniversário!</h1>
         <p>Para a melhor irmã de todo o universo.</p>
     </header>
+
+    <section>
+        <h2>Seu Roteiro Especial ⏳</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px;">Para aproveitar tudo, siga os horários e marque o que já fez!</p>
+        
+        <div class="checklist-card">
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>09:00</strong> - Observar nossas fotos</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>12:00</strong> - Ouvir a minha mensagem de voz</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>15:00</strong> - Ler o que eu amo em você</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>17:00</strong> - Ler a cartinha digital</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>19:00</strong> - Escanear o QR Code e ver o vídeo</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>20:00</strong> - Abrir a Caixa de Presentes</span>
+            </label>
+            
+            <label class="check-container">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="texto-tarefa"><strong>21:00</strong> - Chamada de vídeo <a href="https://wa.me/55SEUNUMERO" target="_blank" style="color: var(--lilás-escuro); text-decoration: underline;">(Me chame clicando aqui!)</a></span>
+            </label>
+        </div>
+    </section>
 
     <section id="momentos">
         <h2>Nossos Momentos</h2>
@@ -190,8 +211,7 @@
     </section>
 
     <section>
-        <h2>Uma Mensagem de Voz</h2>
-        <p>Aperte o play para ouvir um recadinho meu!</p>
+        <h2>Mensagem de Voz</h2>
         <audio controls>
             <source src="mensagem.mp3" type="audio/mpeg">
             Seu navegador não suporta o formato de áudio.
@@ -199,14 +219,29 @@
     </section>
 
     <section>
-        <h2>O que eu amo em você</h2>
+        <h2>20 Coisas Que Amo Em Você</h2>
         <div class="card-amor">
             <ul>
-                <li>O seu coração gigante que acolhe todo mundo.</li>
-                <li>Como você me entende só pelo olhar.</li>
-                <li>Nossas risadas até perder o fôlego.</li>
-                <li>Sua determinação incrível.</li>
-                <li>O fato de você ser minha melhor amiga.</li>
+                <li>1. O seu coração gigante que acolhe todo mundo.</li>
+                <li>2. Como você me entende só pelo olhar.</li>
+                <li>3. Nossas risadas até perder o fôlego.</li>
+                <li>4. Sua determinação incrível.</li>
+                <li>5. O fato de você ser minha melhor amiga.</li>
+                <li>6. Escreva aqui o motivo 6...</li>
+                <li>7. Escreva aqui o motivo 7...</li>
+                <li>8. Escreva aqui o motivo 8...</li>
+                <li>9. Escreva aqui o motivo 9...</li>
+                <li>10. Escreva aqui o motivo 10...</li>
+                <li>11. Escreva aqui o motivo 11...</li>
+                <li>12. Escreva aqui o motivo 12...</li>
+                <li>13. Escreva aqui o motivo 13...</li>
+                <li>14. Escreva aqui o motivo 14...</li>
+                <li>15. Escreva aqui o motivo 15...</li>
+                <li>16. Escreva aqui o motivo 16...</li>
+                <li>17. Escreva aqui o motivo 17...</li>
+                <li>18. Escreva aqui o motivo 18...</li>
+                <li>19. Escreva aqui o motivo 19...</li>
+                <li>20. E por ser simplesmente você!</li>
             </ul>
         </div>
     </section>
@@ -225,14 +260,11 @@
 
     <section class="qr-section">
         <h2>Um Recado em Vídeo</h2>
-        <p>Escanear para ver a surpresa que preparei:</p>
         <img src="LINK_QR_CODE.png" alt="QR Code">
     </section>
 
     <section>
         <h2>Caixa Surpresa Digital</h2>
-        <p>Preparei alguns mimos para você. Clique na caixa para abrir!</p>
-        
         <div class="caixa-container" onclick="abrirModal()">
             <div id="icone-caixa" style="font-size: 7rem; margin: 0; text-shadow: 0 10px 20px rgba(0,0,0,0.2);">🎁</div>
             <p style="font-weight: bold; color: var(--lilás-escuro); font-size: 1.4rem; margin-top: 15px;">Toque para abrir!</p>
@@ -263,20 +295,12 @@
     </div>
 
     <script>
-        function abrirModal() {
-            document.getElementById("meuModal").style.display = "flex";
-        }
-        function fecharModal() {
-            document.getElementById("meuModal").style.display = "none";
-        }
+        function abrirModal() { document.getElementById("meuModal").style.display = "flex"; }
+        function fecharModal() { document.getElementById("meuModal").style.display = "none"; }
         window.onclick = function(event) {
             var modal = document.getElementById("meuModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            if (event.target == modal) { modal.style.display = "none"; }
         }
     </script>
-</body>
-</html>
 </body>
 </html>
