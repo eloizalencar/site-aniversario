@@ -17,27 +17,75 @@
         body { 
             font-family: 'Quicksand', sans-serif; 
             margin: 0; padding: 0; 
-            background: linear-gradient(135deg, #fff0f5 0%, #f3e5f5 100%); 
+            /* Fundo degradê quente aprimorado */
+            background: linear-gradient(135deg, #fff0f5 0%, #f3e5f5 50%, #fff0f5 100%); 
             color: #4a148c; overflow-x: hidden; position: relative; 
         }
 
-        /* Corações Flutuantes */
-        .coracao { position: absolute; font-size: 1.5rem; color: rgba(216, 27, 96, 0.15); animation: flutuar 12s linear infinite; z-index: 0; }
+        /* --- ANIMAÇÕES DE FUNDO: CORAÇÕES E BRILHOS --- */
+        
+        /* Corações flutuantes e translúcidos */
+        .coracao {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(216, 27, 96, 0.12); /* Rosinha suave */
+            animation: flutuar linear infinite;
+            z-index: 0;
+            pointer-events: none; /* Não atrapalha os cliques */
+        }
+        
+        /* Brilhos pequenos que piscam por todo o fundo */
+        .brilho {
+            position: absolute;
+            width: 3px; height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: piscar linear infinite;
+            z-index: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         @keyframes flutuar {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5) rotate(45deg); opacity: 0; }
+            100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
         }
-        .coracao:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
-        .coracao:nth-child(2) { left: 30%; animation-duration: 12s; animation-delay: 2s; font-size: 2.5rem; }
-        .coracao:nth-child(3) { left: 50%; animation-duration: 18s; animation-delay: 4s; }
-        .coracao:nth-child(4) { left: 70%; animation-duration: 14s; animation-delay: 1s; font-size: 2rem; }
-        .coracao:nth-child(5) { left: 90%; animation-duration: 16s; animation-delay: 3s; }
-        .coracao:nth-child(6) { left: 20%; animation-duration: 13s; animation-delay: 5s; }
-        .coracao:nth-child(7) { left: 80%; animation-duration: 17s; animation-delay: 6s; font-size: 3rem; }
 
-        /* Estrelas Cadentes */
+        @keyframes piscar {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; transform: scale(1.2); }
+            100% { opacity: 0; }
+        }
+
+        /* Gerando várias instâncias misturadas (copie e cole no HTML abaixo se quiser mais) */
+        /* Corações */
+        .coracao:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; font-size: 2rem; }
+        .coracao:nth-child(2) { left: 25%; animation-duration: 12s; animation-delay: 2s; font-size: 1rem; }
+        .coracao:nth-child(3) { left: 45%; animation-duration: 18s; animation-delay: 4s; font-size: 2.5rem; }
+        .coracao:nth-child(4) { left: 65%; animation-duration: 14s; animation-delay: 1s; font-size: 1.8rem; }
+        .coracao:nth-child(5) { left: 85%; animation-duration: 16s; animation-delay: 3s; font-size: 1.2rem; }
+        .coracao:nth-child(6) { left: 15%; animation-duration: 19s; animation-delay: 5s; font-size: 1.5rem; }
+        .coracao:nth-child(7) { left: 55%; animation-duration: 13s; animation-delay: 6s; font-size: 2.2rem; }
+        .coracao:nth-child(8) { left: 75%; animation-duration: 17s; animation-delay: 7s; font-size: 1rem; }
+
+        /* Brilhos (Twinkles) espalhados aleatoriamente */
+        .brilho:nth-child(9) { top: 10%; left: 10%; animation-duration: 3s; animation-delay: 0.5s; }
+        .brilho:nth-child(10) { top: 30%; left: 20%; animation-duration: 4s; animation-delay: 1s; }
+        .brilho:nth-child(11) { top: 50%; left: 30%; animation-duration: 2.5s; animation-delay: 1.5s; }
+        .brilho:nth-child(12) { top: 70%; left: 40%; animation-duration: 3.5s; animation-delay: 0.2s; }
+        .brilho:nth-child(13) { top: 90%; left: 50%; animation-duration: 4.5s; animation-delay: 1.8s; }
+        .brilho:nth-child(14) { top: 20%; left: 60%; animation-duration: 3s; animation-delay: 0.8s; }
+        .brilho:nth-child(15) { top: 40%; left: 70%; animation-duration: 4s; animation-delay: 1.2s; }
+        .brilho:nth-child(16) { top: 60%; left: 80%; animation-duration: 2.8s; animation-delay: 0.1s; }
+        .brilho:nth-child(17) { top: 80%; left: 90%; animation-duration: 3.2s; animation-delay: 1.9s; }
+        .brilho:nth-child(18) { top: 15%; left: 95%; animation-duration: 4.2s; animation-delay: 0.6s; }
+        .brilho:nth-child(19) { top: 85%; left: 5%; animation-duration: 3.8s; animation-delay: 1.4s; }
+
+
+        /* --- ESTRELAS CADENTES --- */
         @keyframes estrelaCadente {
             0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
             100% { transform: translateX(-1200px) translateY(1200px) rotate(-45deg); opacity: 0; }
@@ -45,18 +93,17 @@
         .estrela {
             position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%;
             box-shadow: 0 0 15px 4px var(--estrela-cor), 0 0 30px 10px rgba(206, 147, 216, 0.6);
-            opacity: 0; animation: estrelaCadente 3.5s linear infinite; z-index: 0; 
+            opacity: 0; animation: estrelaCadente 3.5s linear infinite; z-index: 0; pointer-events: none;
         }
         .estrela::before {
             content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-            width: 70px; height: 2px; background: linear-gradient(90deg, #fff, transparent);
+            width: 80px; height: 2px; background: linear-gradient(90deg, #fff, transparent);
         }
-        .estrela:nth-child(8) { top: 5%; left: 90%; animation-delay: 0s; }
-        .estrela:nth-child(9) { top: 25%; left: 80%; animation-delay: 1.2s; animation-duration: 2.5s; }
-        .estrela:nth-child(10) { top: 45%; left: 95%; animation-delay: 2.5s; animation-duration: 4s;}
-        .estrela:nth-child(11) { top: 65%; left: 85%; animation-delay: 0.5s; animation-duration: 3s; }
-        .estrela:nth-child(12) { top: 15%; left: 70%; animation-delay: 1.8s; }
-        .estrela:nth-child(13) { top: 35%; left: 60%; animation-delay: 2.8s; animation-duration: 5s; }
+        /* Posições das estrelas cadentes */
+        .estrela:nth-child(20) { top: 5%; left: 90%; animation-delay: 0s; }
+        .estrela:nth-child(21) { top: 25%; left: 80%; animation-delay: 1.2s; animation-duration: 2.5s; }
+        .estrela:nth-child(22) { top: 65%; left: 95%; animation-delay: 2.5s; animation-duration: 4s;}
+        .estrela:nth-child(23) { top: 85%; left: 70%; animation-delay: 0.5s; animation-duration: 3s; }
 
         /* Capa Gigante */
         .capa { 
@@ -69,30 +116,29 @@
         .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(4rem, 12vw, 7rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
         .capa p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
 
-        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(206, 147, 216, 0.3); }
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(206, 147, 216, 0.3); }
 
-        /* --- CRONOGRAMA INTERATIVO --- */
+        /* Cronograma Interativo */
         .checklist-card {
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
             padding: 30px 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1);
             text-align: left; max-width: 650px; margin: 0 auto; border-left: 10px solid var(--lilás-escuro);
         }
         .check-container {
-            display: block; position: relative; padding-left: 40px; margin-bottom: 18px;
+            display: block; position: relative; padding-left: 45px; margin-bottom: 20px;
             cursor: pointer; font-size: 1.2rem; color: #5a189a; font-weight: 600; transition: 0.3s;
         }
         .check-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .checkmark {
-            position: absolute; top: 0; left: 0; height: 26px; width: 26px;
+            position: absolute; top: 0; left: 0; height: 28px; width: 28px;
             background-color: #fff; border: 3px solid var(--lavanda); border-radius: 8px; transition: 0.3s;
         }
         .check-container:hover input ~ .checkmark { background-color: var(--lilás-claro); }
         .check-container input:checked ~ .checkmark { background-color: var(--lilás-escuro); border-color: var(--lilás-escuro); }
         .checkmark:after { content: ""; position: absolute; display: none; }
         .check-container input:checked ~ .checkmark:after { display: block; }
-        .check-container .checkmark:after { left: 8px; top: 3px; width: 6px; height: 12px; border: solid white; border-width: 0 3px 3px 0; transform: rotate(45deg); }
-        /* Efeito de riscar o texto */
+        .check-container .checkmark:after { left: 9px; top: 4px; width: 6px; height: 12px; border: solid white; border-width: 0 3px 3px 0; transform: rotate(45deg); }
         .check-container input:checked ~ .texto-tarefa { text-decoration: line-through; color: #b39ddb; font-style: italic; }
 
         /* Galeria e outros elementos */
@@ -130,10 +176,16 @@
 <body>
 
     <div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
-    <div class="coracao">✨</div><div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
-    <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
-    <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
+    <div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
+    <div class="coracao">❤️</div><div class="coracao">💜</div>
+    
+    <div class="brilho"></div><div class="brilho"></div><div class="brilho"></div>
+    <div class="brilho"></div><div class="brilho"></div><div class="brilho"></div>
+    <div class="brilho"></div><div class="brilho"></div><div class="brilho"></div>
+    <div class="brilho"></div><div class="brilho"></div>
 
+    <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
+    <div class="estrela"></div>
     <header class="capa">
         <h1>Feliz Aniversário!</h1>
         <p>Para a melhor irmã de todo o universo.</p>
@@ -147,43 +199,43 @@
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>09:00</strong> - Observar nossas fotos</span>
+                <span class="texto-tarefa"><strong>09:00</strong> - Nossa Galeria: Escolha sua foto favorita e me mande um Zap dizendo porquê! 📸</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>12:00</strong> - Ouvir a minha mensagem de voz</span>
+                <span class="texto-tarefa"><strong>12:00</strong> - Ouvir a minha mensagem de voz 🎙️</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>15:00</strong> - Ler o que eu amo em você</span>
+                <span class="texto-tarefa"><strong>15:00</strong> - Ler as 20 coisas que amo em você 💖</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>17:00</strong> - Ler a cartinha digital</span>
+                <span class="texto-tarefa"><strong>17:00</strong> - Abrir a cartinha digital 💌</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>19:00</strong> - Escanear o QR Code e ver o vídeo</span>
+                <span class="texto-tarefa"><strong>19:00</strong> - Escanear o QR Code e ver o vídeo 🎬</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>20:00</strong> - Abrir a Caixa de Presentes</span>
+                <span class="texto-tarefa"><strong>20:00</strong> - Toque na Caixa e abra seus Presentes 🎁</span>
             </label>
             
             <label class="check-container">
                 <input type="checkbox">
                 <span class="checkmark"></span>
-                <span class="texto-tarefa"><strong>21:00</strong> - Chamada de vídeo <a href="https://wa.me/55SEUNUMERO" target="_blank" style="color: var(--lilás-escuro); text-decoration: underline;">(Me chame clicando aqui!)</a></span>
+                <span class="texto-tarefa"><strong>21:00</strong> - Nossa chamada de vídeo! <a href="https://wa.me/55SEUNUMERO" target="_blank" style="color: var(--lilás-escuro); text-decoration: underline;">(Me chame clicando aqui!)</a> 📞</span>
             </label>
         </div>
     </section>
@@ -211,7 +263,7 @@
     </section>
 
     <section>
-        <h2>Mensagem de Voz</h2>
+        <h2>Mensagem de Voz 🎙️</h2>
         <audio controls>
             <source src="mensagem.mp3" type="audio/mpeg">
             Seu navegador não suporta o formato de áudio.
@@ -219,14 +271,14 @@
     </section>
 
     <section>
-        <h2>20 Coisas Que Amo Em Você</h2>
+        <h2>20 Coisas Que Amo Em Você 💖</h2>
         <div class="card-amor">
             <ul>
                 <li>1. O seu coração gigante que acolhe todo mundo.</li>
                 <li>2. Como você me entende só pelo olhar.</li>
                 <li>3. Nossas risadas até perder o fôlego.</li>
-                <li>4. Sua determinação incrível.</li>
-                <li>5. O fato de você ser minha melhor amiga.</li>
+                <li>4. Sua determinação incrível em tudo que faz.</li>
+                <li>5. O fato de você ser, além de irmã, minha melhor amiga.</li>
                 <li>6. Escreva aqui o motivo 6...</li>
                 <li>7. Escreva aqui o motivo 7...</li>
                 <li>8. Escreva aqui o motivo 8...</li>
@@ -241,30 +293,31 @@
                 <li>17. Escreva aqui o motivo 17...</li>
                 <li>18. Escreva aqui o motivo 18...</li>
                 <li>19. Escreva aqui o motivo 19...</li>
-                <li>20. E por ser simplesmente você!</li>
+                <li>20. E por ser simplesmente essa pessoa insubstituível que você é!</li>
             </ul>
         </div>
     </section>
 
     <section>
-        <h2>Uma Cartinha Especial</h2>
+        <h2>Uma Cartinha Especial 💌</h2>
         <div class="envelope-wrapper">
             <div class="envelope" onclick="this.classList.toggle('aberto')">
                 <div class="carta">
                     <p><strong>Minha irmã amada,</strong></p>
-                    <p>Escreva aqui a sua carta... Lembre-se que o espaço agora se expande quando ela clica!</p>
+                    <p>Escreva aqui sua mensagem emocionante e longa. Diga o quanto ela significa para você!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="qr-section">
-        <h2>Um Recado em Vídeo</h2>
-        <img src="LINK_QR_CODE.png" alt="QR Code">
+        <h2>Um Recado em Vídeo 🎬</h2>
+        <p>Aponte a câmera do celular para ver a surpresa:</p>
+        <img src="LINK_QR_CODE.png" alt="QR Code da Surpresa">
     </section>
 
     <section>
-        <h2>Caixa Surpresa Digital</h2>
+        <h2>Caixa Surpresa Digital 🎁</h2>
         <div class="caixa-container" onclick="abrirModal()">
             <div id="icone-caixa" style="font-size: 7rem; margin: 0; text-shadow: 0 10px 20px rgba(0,0,0,0.2);">🎁</div>
             <p style="font-weight: bold; color: var(--lilás-escuro); font-size: 1.4rem; margin-top: 15px;">Toque para abrir!</p>
