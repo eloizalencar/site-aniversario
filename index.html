@@ -108,6 +108,14 @@
         .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(4rem, 12vw, 7rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
         .capa p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
 
+        /* --- CORREÇÃO DA CAPA PARA O CELULAR --- */
+        @media (max-width: 768px) {
+            .capa {
+                background-attachment: scroll; /* Tira o zoom gigante no celular */
+                background-position: top center; /* Foca nos rostos na parte de cima da foto */
+            }
+        }
+
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
         h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6); }
 
@@ -217,22 +225,23 @@
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(74, 20, 140, 0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
         .modal-conteudo { background-color: var(--lilás-claro); padding: 40px; border-radius: 25px; max-width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; animation: abrirPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes abrirPopUp { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10001; }
+        .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; }
         .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
-        
-        /* --- ESTILO PARA AMPLIAR OS CUPONS --- */
-        .grid-modal-cupons img {
-            width: 100%; border-radius: 15px; cursor: zoom-in;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s, z-index 0.3s;
-        }
+        .grid-modal-cupons img { cursor: zoom-in; width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .grid-modal-cupons img:hover { transform: scale(1.05); }
-        .img-ampliada {
-            position: fixed !important; top: 50% !important; left: 50% !important;
-            transform: translate(-50%, -50%) scale(2) !important;
-            z-index: 10000 !important; cursor: zoom-out !important;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8) !important;
-            max-width: 45vw; max-height: 90vh; object-fit: contain;
+
+        /* --- NOVO ZOOM DOS CUPONS TOTALMENTE INDEPENDENTE --- */
+        #zoomModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 999999; 
+            justify-content: center; align-items: center; cursor: zoom-out;
         }
+        #zoomModal img {
+            max-width: 95%; max-height: 90vh; border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            animation: abrirZoom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes abrirZoom { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* --- NOVA SEÇÃO: CHAMADA WHATSAPP OFICIAL --- */
         .whatsapp-section {
@@ -407,7 +416,7 @@
         <div class="modal-conteudo">
             <span class="fechar-modal" onclick="fecharModal()">&times;</span>
             <h2 style="margin-top: 0; font-size: 3rem; color: #880e4f;">Seus Presentes! 🎉</h2>
-            <p style="font-size: 1.2rem; color: #4a148c; margin-bottom: 20px;">Clique nos cupons para ver os detalhes!</p>
+            <p style="font-size: 1.2rem; color: #4a148c; margin-bottom: 20px;">Toque nas imagens para ler os detalhes de cada presente!</p>
             <div class="grid-modal-cupons">
                 <img src="v1.png" onclick="ampliarCupom(this)" alt="Cupom 1">
                 <img src="v2.png" onclick="ampliarCupom(this)" alt="Cupom 2">
@@ -419,56 +428,29 @@
         </div>
     </div>
 
+    <div id="zoomModal" onclick="fecharZoom()">
+        <img id="zoomImg" src="" alt="Cupom Ampliado">
+    </div>
+
     <script>
         /* --- LÓGICA DO POP-UP DA CAIXA --- */
         function abrirModal() { document.getElementById("meuModal").style.display = "flex"; }
         function fecharModal() { document.getElementById("meuModal").style.display = "none"; }
         
-        /* Fecha o modal se clicar fora, mas ignora se o clique for para ampliar o cupom */
         window.onclick = function(event) { 
             let modal = document.getElementById("meuModal");
-            if (event.target == modal) {
-                fecharModal();
-            }
+            if (event.target == modal) { fecharModal(); }
         }
 
-        /* --- LÓGICA PARA AMPLIAR OS CUPONS --- */
-        function ampliarCupom(imagem) {
-            // Se a imagem já estiver ampliada, volta ao normal
-            if (imagem.classList.contains('img-ampliada')) {
-                imagem.classList.remove('img-ampliada');
-                // Remove a película escura do fundo (overlay)
-                let overlay = document.getElementById('overlay-zoom');
-                if(overlay) overlay.remove();
-            } else {
-                // Se não estiver, amplia
-                
-                // 1. Desamplia qualquer outra que esteja ampliada
-                let ampliadaAnterior = document.querySelector('.img-ampliada');
-                if(ampliadaAnterior) ampliadaAnterior.classList.remove('img-ampliada');
-                
-                // 2. Cria um fundo escuro atrás da imagem ampliada para dar destaque
-                let overlay = document.getElementById('overlay-zoom');
-                if(!overlay) {
-                    overlay = document.createElement('div');
-                    overlay.id = 'overlay-zoom';
-                    overlay.style.position = 'fixed';
-                    overlay.style.top = '0'; overlay.style.left = '0';
-                    overlay.style.width = '100%'; overlay.style.height = '100%';
-                    overlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
-                    overlay.style.zIndex = '9999'; // Fica atrás da imagem (10000) mas na frente do modal
-                    document.body.appendChild(overlay);
-                    
-                    // Se clicar no fundo escuro, desamplia a imagem
-                    overlay.onclick = function() {
-                        imagem.classList.remove('img-ampliada');
-                        this.remove();
-                    };
-                }
-                
-                // 3. Aplica a classe que dá o zoom
-                imagem.classList.add('img-ampliada');
-            }
+        /* --- LÓGICA PARA O NOVO ZOOM DOS CUPONS --- */
+        function ampliarCupom(imagemClicada) {
+            // Pega a URL da imagem clicada e joga na tela de Zoom gigante
+            document.getElementById('zoomImg').src = imagemClicada.src;
+            document.getElementById('zoomModal').style.display = 'flex';
+        }
+        
+        function fecharZoom() {
+            document.getElementById('zoomModal').style.display = 'none';
         }
 
         /* --- LÓGICA DAS MÚSICAS NAS FOTOS --- */
