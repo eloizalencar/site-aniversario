@@ -125,10 +125,38 @@
         .check-container input:checked ~ .checkmark:after { display: block; }
         .check-container input:checked ~ .texto-tarefa { text-decoration: line-through; color: #b39ddb; font-style: italic; }
 
-        /* Galeria */
+        /* Alerta de Música */
+        .alerta-musica {
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+            padding: 25px 35px; border-radius: 20px; box-shadow: 0 10px 25px rgba(136, 14, 79, 0.15);
+            max-width: 700px; margin: 0 auto 40px auto; border: 2px dashed var(--lavanda);
+            text-align: left;
+        }
+        .alerta-musica h3 { color: var(--lilás-escuro); margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.6rem;}
+        .alerta-musica p { font-size: 1.15rem; color: #4a148c; line-height: 1.5; margin-bottom: 10px;}
+        .alerta-musica ul { padding-left: 20px; color: #5a189a; font-size: 1.1rem;}
+        .alerta-musica li { margin-bottom: 8px; }
+
+        /* Galeria e Fotos com Efeito Musical */
         .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-        .galeria img { width: 100%; height: 300px; object-fit: cover; border-radius: 20px; border: 5px solid white; box-shadow: 0 12px 25px rgba(136, 14, 79, 0.15); transition: all 0.4s; }
+        .galeria img { 
+            width: 100%; height: 300px; object-fit: cover; border-radius: 20px; border: 5px solid white; 
+            box-shadow: 0 12px 25px rgba(136, 14, 79, 0.15); transition: all 0.4s; cursor: pointer;
+        }
         .galeria img:hover { transform: scale(1.05) translateY(-5px); z-index: 2; }
+        
+        /* Efeito quando a foto está tocando música */
+        .tocando {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 30px var(--lilás-escuro) !important;
+            border-color: var(--lavanda) !important;
+            animation: pulsarMusica 1.5s infinite alternate;
+            z-index: 2;
+        }
+        @keyframes pulsarMusica {
+            0% { box-shadow: 0 0 15px var(--lilás-escuro); }
+            100% { box-shadow: 0 0 35px var(--estrela-cor); }
+        }
 
         /* Cards Amor */
         .card-amor { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.15); text-align: left; border-left: 10px solid var(--lavanda); max-width: 850px; margin: 0 auto; }
@@ -214,6 +242,7 @@
     <div class="brilho"></div><div class="brilho"></div>
 
     <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
+
     <header class="capa">
         <h1>Feliz Aniversário!</h1>
         <p>Para a melhor irmã de todo o universo.</p>
@@ -234,13 +263,52 @@
 
     <section id="momentos">
         <h2>Nossos Momentos</h2>
-        <div class="galeria">
-            <img src="1.jpeg" alt="Momento 1"><img src="2.jpeg" alt="Momento 2"><img src="3.jpeg" alt="Momento 3">
-            <img src="4.jpeg" alt="Momento 4"><img src="5.jpeg" alt="Momento 5"><img src="6.jpeg" alt="Momento 6">
-            <img src="7.jpeg" alt="Momento 7"><img src="8.jpeg" alt="Momento 8"><img src="9.jpeg" alt="Momento 9">
-            <img src="10.jpeg" alt="Momento 10"><img src="11.jpeg" alt="Momento 11"><img src="12.jpeg" alt="Momento 12">
-            <img src="13.jpeg" alt="Momento 13"><img src="14.jpeg" alt="Momento 14"><img src="15.jpeg" alt="Momento 15"><img src="16.jpeg" alt="Momento 16">
+        
+        <div class="alerta-musica">
+            <h3>🎧 Uma Trilha Sonora para Nossas Memórias</h3>
+            <p>Prepare o coração! Cada foto abaixo guarda uma música que me lembra você ou algum momento nosso.</p>
+            <ul>
+                <li><strong>Para ouvir:</strong> Dê um clique sobre a foto.</li>
+                <li><strong>Para pausar:</strong> Clique na foto novamente.</li>
+                <li>(Se você clicar em outra foto, a música anterior para automaticamente).</li>
+            </ul>
         </div>
+
+        <div class="galeria">
+            <img src="1.jpeg" id="img1" onclick="tocarMusica(1)" alt="Momento 1">
+            <img src="2.jpeg" id="img2" onclick="tocarMusica(2)" alt="Momento 2">
+            <img src="3.jpeg" id="img3" onclick="tocarMusica(3)" alt="Momento 3">
+            <img src="4.jpeg" id="img4" onclick="tocarMusica(4)" alt="Momento 4">
+            <img src="5.jpeg" id="img5" onclick="tocarMusica(5)" alt="Momento 5">
+            <img src="6.jpeg" id="img6" onclick="tocarMusica(6)" alt="Momento 6">
+            <img src="7.jpeg" id="img7" onclick="tocarMusica(7)" alt="Momento 7">
+            <img src="8.jpeg" id="img8" onclick="tocarMusica(8)" alt="Momento 8">
+            <img src="9.jpeg" id="img9" onclick="tocarMusica(9)" alt="Momento 9">
+            <img src="10.jpeg" id="img10" onclick="tocarMusica(10)" alt="Momento 10">
+            <img src="11.jpeg" id="img11" onclick="tocarMusica(11)" alt="Momento 11">
+            <img src="12.jpeg" id="img12" onclick="tocarMusica(12)" alt="Momento 12">
+            <img src="13.jpeg" id="img13" onclick="tocarMusica(13)" alt="Momento 13">
+            <img src="14.jpeg" id="img14" onclick="tocarMusica(14)" alt="Momento 14">
+            <img src="15.jpeg" id="img15" onclick="tocarMusica(15)" alt="Momento 15">
+            <img src="16.jpeg" id="img16" onclick="tocarMusica(16)" alt="Momento 16">
+        </div>
+        
+        <audio id="audio1" src="musica1.mp3"></audio>
+        <audio id="audio2" src="musica2.mp3"></audio>
+        <audio id="audio3" src="musica3.mp3"></audio>
+        <audio id="audio4" src="musica4.mp3"></audio>
+        <audio id="audio5" src="musica5.mp3"></audio>
+        <audio id="audio6" src="musica6.mp3"></audio>
+        <audio id="audio7" src="musica7.mp3"></audio>
+        <audio id="audio8" src="musica8.mp3"></audio>
+        <audio id="audio9" src="musica9.mp3"></audio>
+        <audio id="audio10" src="musica10.mp3"></audio>
+        <audio id="audio11" src="musica11.mp3"></audio>
+        <audio id="audio12" src="musica12.mp3"></audio>
+        <audio id="audio13" src="musica13.mp3"></audio>
+        <audio id="audio14" src="musica14.mp3"></audio>
+        <audio id="audio15" src="musica15.mp3"></audio>
+        <audio id="audio16" src="musica16.mp3"></audio>
     </section>
 
     <section>
@@ -326,18 +394,52 @@
             <span class="fechar-modal" onclick="fecharModal()">&times;</span>
             <h2 style="margin-top: 0; font-size: 3rem; color: #880e4f;">Seus Presentes! 🎉</h2>
             <div class="grid-modal-cupons">
-                <a href="#" target="_blank"><img src="cupom1.png" style="width: 100%; border-radius: 15px;"></a>
-                <a href="#" target="_blank"><img src="cupom2.png" style="width: 100%; border-radius: 15px;"></a>
-                <a href="#" target="_blank"><img src="cupom3.png" style="width: 100%; border-radius: 15px;"></a>
-                <a href="#" target="_blank"><img src="cupom4.png" style="width: 100%; border-radius: 15px;"></a>
+                <a href="#" target="_blank"><img src="v1.png" style="width: 100%; border-radius: 15px;"></a>
+                <a href="#" target="_blank"><img src="v2.png" style="width: 100%; border-radius: 15px;"></a>
+                <a href="#" target="_blank"><img src="v3.png" style="width: 100%; border-radius: 15px;"></a>
+                <a href="#" target="_blank"><img src="v4.png" style="width: 100%; border-radius: 15px;"></a>
+                <a href="#" target="_blank"><img src="v5.png" style="width: 100%; border-radius: 15px;"></a>
             </div>
         </div>
     </div>
 
     <script>
+        /* --- LÓGICA DO POP-UP --- */
         function abrirModal() { document.getElementById("meuModal").style.display = "flex"; }
         function fecharModal() { document.getElementById("meuModal").style.display = "none"; }
         window.onclick = function(event) { if (event.target == document.getElementById("meuModal")) fecharModal(); }
+
+        /* --- LÓGICA DAS MÚSICAS NAS FOTOS --- */
+        let musicaAtual = null;
+
+        function tocarMusica(id) {
+            let audioClicado = document.getElementById('audio' + id);
+            let fotoClicada = document.getElementById('img' + id);
+
+            // Se clicou na mesma foto e a música está tocando: pausa.
+            if (musicaAtual === audioClicado) {
+                audioClicado.pause();
+                fotoClicada.classList.remove('tocando');
+                musicaAtual = null;
+            } 
+            // Se clicou em uma música nova
+            else {
+                // Pausa qualquer outra que estiver tocando
+                if (musicaAtual) {
+                    musicaAtual.pause();
+                    for(let i=1; i<=16; i++) {
+                        let f = document.getElementById('img'+i);
+                        if(f) f.classList.remove('tocando');
+                    }
+                }
+                
+                // Toca a nova música do zero
+                audioClicado.currentTime = 0; 
+                audioClicado.play();
+                fotoClicada.classList.add('tocando'); 
+                musicaAtual = audioClicado;
+            }
+        }
     </script>
 </body>
 </html>
