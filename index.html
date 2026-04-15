@@ -60,7 +60,7 @@
             margin-bottom: 40px;
         }
 
-        /* Galeria para 15 Fotos */
+        /* Galeria para 16 Fotos */
         .galeria { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -121,21 +121,20 @@
         .aberto::before { transform: rotateX(180deg); }
         .aberto .carta { transform: translateY(-130px); z-index: 3; height: auto; max-height: 350px; }
 
-        /* Cupons */
-        .grid-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .cupom {
-            background: var(--lilás-claro);
-            padding: 20px;
-            border: 3px dashed var(--lilás-escuro);
-            border-radius: 15px;
-        }
-
         .qr-section img {
             width: 250px;
             border: 8px solid white;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+
+        /* Animações da Caixa Surpresa */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .caixa-container:hover { transform: scale(1.1) !important; }
+        
     </style>
 </head>
 <body>
@@ -199,26 +198,54 @@
     </section>
 
     <section>
-        <h2>Seus Cupons</h2>
-        <div class="grid-cupons">
-            <div class="cupom">
-                <h3>🛍️ Vale Presente</h3>
-                <p>Shopee ou Shein</p>
-                <p><strong>CÓDIGO: [SEU CÓDIGO]</strong></p>
-            </div>
-            <div class="cupom">
-                <h3>📞 Chamada de Vídeo</h3>
-                <p>Para fofocarmos por horas!</p>
-            </div>
-            <div class="cupom">
-                <h3>🍿 Cinema</h3>
-                <p>Vale um filme com pipoca por minha conta.</p>
-            </div>
-            <div class="cupom">
-                <h3>🌅 Nascer do Sol</h3>
-                <p>Stand Up Paddle em Copacabana.</p>
-            </div>
+        <h2>Caixa Surpresa Digital</h2>
+        <p>Preparei alguns mimos para você. Clique na caixa para abrir!</p>
+        
+        <div class="caixa-container" onclick="abrirCaixa()" style="cursor: pointer; transition: transform 0.3s; margin: 20px auto;">
+            <div id="icone-caixa" style="font-size: 5rem; margin: 0;">🎁</div>
+            <p id="texto-caixa" style="font-weight: bold; color: var(--lilás-escuro);">Toque para abrir!</p>
         </div>
+
+        <div id="meus-cupons" style="display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; animation: fadeIn 1s ease-in-out;">
+            
+            <a href="COLOQUE_O_LINK_AQUI" target="_blank">
+                <img src="cupom1.png" alt="Cupom 1" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+            
+            <a href="COLOQUE_O_LINK_AQUI" target="_blank">
+                <img src="cupom2.png" alt="Cupom 2" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+            
+            <a href="COLOQUE_O_LINK_AQUI" target="_blank">
+                <img src="cupom3.png" alt="Cupom 3" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+            
+            <a href="COLOQUE_O_LINK_AQUI" target="_blank">
+                <img src="cupom4.png" alt="Cupom 4" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+
+        </div>
+    </section>
+
+    <script>
+        function abrirCaixa() {
+            var caixa = document.getElementById('meus-cupons');
+            var icone = document.getElementById('icone-caixa');
+            var texto = document.getElementById('texto-caixa');
+            
+            if (caixa.style.display === 'none') {
+                caixa.style.display = 'grid'; 
+                icone.innerHTML = '🎉'; 
+                texto.innerHTML = 'Aqui estão seus presentes!';
+            } else {
+                caixa.style.display = 'none'; 
+                icone.innerHTML = '🎁';
+                texto.innerHTML = 'Toque para abrir!';
+            }
+        }
+    </script>
+</body>
+</html>
     </section>
 
 </body>
