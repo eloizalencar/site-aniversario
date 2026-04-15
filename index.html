@@ -7,125 +7,160 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --lilás-claro: #f3e5f5;
-            --lilás-medio: #e1bee7;
-            --lilás-escuro: #9c27b0;
-            --lavanda: #b39ddb;
-            --estrela-cor: #ba68c8;
+            --lilás-claro: #fbebf3; /* Mais puxado para o rosa bebê quente */
+            --lilás-medio: #e8bdeb;
+            --lilás-escuro: #880e4f; /* Um roxo/rosa bem mais profundo e quente */
+            --lavanda: #ce93d8;
+            --estrela-cor: #ff80ab; /* Estrelas mais vivas */
         }
 
         body { 
             font-family: 'Quicksand', sans-serif; 
             margin: 0; 
             padding: 0; 
-            background-color: #fafafa; 
+            /* Fundo degradê quente e aconchegante em vez de branco frio */
+            background: linear-gradient(135deg, #fff0f5 0%, #f3e5f5 100%); 
             color: #4a148c; 
             overflow-x: hidden; 
             position: relative; 
         }
 
-        /* Animação das Estrelas Cadentes */
+        /* --- CORAÇÕES FLUTUANTES NO FUNDO --- */
+        .coracao {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(216, 27, 96, 0.15); /* Corações rosinhas bem suaves */
+            animation: flutuar 12s linear infinite;
+            z-index: 0;
+        }
+        @keyframes flutuar {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5) rotate(45deg); opacity: 0; }
+        }
+        .coracao:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+        .coracao:nth-child(2) { left: 30%; animation-duration: 12s; animation-delay: 2s; font-size: 2.5rem; }
+        .coracao:nth-child(3) { left: 50%; animation-duration: 18s; animation-delay: 4s; }
+        .coracao:nth-child(4) { left: 70%; animation-duration: 14s; animation-delay: 1s; font-size: 2rem; }
+        .coracao:nth-child(5) { left: 90%; animation-duration: 16s; animation-delay: 3s; }
+        .coracao:nth-child(6) { left: 20%; animation-duration: 13s; animation-delay: 5s; }
+        .coracao:nth-child(7) { left: 80%; animation-duration: 17s; animation-delay: 6s; font-size: 3rem; }
+
+        /* --- ESTRELAS CADENTES APRIMORADAS --- */
         @keyframes estrelaCadente {
             0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
-            100% { transform: translateX(-1000px) translateY(1000px) rotate(-45deg); opacity: 0; }
+            100% { transform: translateX(-1200px) translateY(1200px) rotate(-45deg); opacity: 0; }
         }
 
         .estrela {
             position: absolute;
-            width: 4px; height: 4px;
-            background: var(--estrela-cor);
+            width: 6px; height: 6px;
+            background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px var(--estrela-cor);
+            /* Brilho super forte roxo/rosa em volta da estrela */
+            box-shadow: 0 0 15px 4px var(--estrela-cor), 0 0 30px 10px rgba(206, 147, 216, 0.6);
             opacity: 0;
-            animation: estrelaCadente 3s linear infinite;
-            z-index: -1; 
+            animation: estrelaCadente 3.5s linear infinite;
+            z-index: 0; 
+        }
+        /* Cauda da Estrela */
+        .estrela::before {
+            content: '';
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 70px; height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
         }
 
-        /* Posições das estrelas espalhadas pelo site */
-        .estrela:nth-child(1) { top: 10%; left: 90%; animation-delay: 0s; }
-        .estrela:nth-child(2) { top: 30%; left: 80%; animation-delay: 1s; animation-duration: 2s; }
-        .estrela:nth-child(3) { top: 50%; left: 95%; animation-delay: 2s; animation-duration: 4s;}
-        .estrela:nth-child(4) { top: 70%; left: 85%; animation-delay: 0.5s; animation-duration: 3s; }
-        .estrela:nth-child(5) { top: 20%; left: 70%; animation-delay: 1.5s; }
-        .estrela:nth-child(6) { top: 40%; left: 60%; animation-delay: 2.5s; animation-duration: 5s; }
-        .estrela:nth-child(7) { top: 60%; left: 50%; animation-delay: 1s; }
-        .estrela:nth-child(8) { top: 80%; left: 40%; animation-delay: 2s; animation-duration: 4s; }
-        .estrela:nth-child(9) { top: 90%; left: 30%; animation-delay: 0.2s; }
-        .estrela:nth-child(10) { top: 15%; left: 20%; animation-delay: 1.8s; }
+        .estrela:nth-child(8) { top: 5%; left: 90%; animation-delay: 0s; }
+        .estrela:nth-child(9) { top: 25%; left: 80%; animation-delay: 1.2s; animation-duration: 2.5s; }
+        .estrela:nth-child(10) { top: 45%; left: 95%; animation-delay: 2.5s; animation-duration: 4s;}
+        .estrela:nth-child(11) { top: 65%; left: 85%; animation-delay: 0.5s; animation-duration: 3s; }
+        .estrela:nth-child(12) { top: 15%; left: 70%; animation-delay: 1.8s; }
+        .estrela:nth-child(13) { top: 35%; left: 60%; animation-delay: 2.8s; animation-duration: 5s; }
+        .estrela:nth-child(14) { top: 55%; left: 50%; animation-delay: 1.5s; }
+        .estrela:nth-child(15) { top: 85%; left: 40%; animation-delay: 2.2s; animation-duration: 4.5s; }
 
-        /* Capa Gigante */
+        /* Capa Gigante (Deixei o filtro um pouco mais quente) */
         .capa { 
             height: 100vh; width: 100%;
-            background: linear-gradient(rgba(74, 20, 140, 0.4), rgba(74, 20, 140, 0.4)), url('capa.jpeg'); 
+            background: linear-gradient(rgba(136, 14, 79, 0.3), rgba(74, 20, 140, 0.4)), url('capa.jpeg'); 
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             color: white; text-align: center; position: relative; z-index: 1; 
         }
-        .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 10vw, 6rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
-        .capa p { font-size: 1.5rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
+        .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(4rem, 12vw, 7rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
+        .capa p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
 
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 40px; }
+        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--lilás-escuro); margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(206, 147, 216, 0.3); }
 
-        /* Galeria para 16 Fotos */
-        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .galeria img { width: 100%; height: 300px; object-fit: cover; border-radius: 15px; border: 6px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .galeria img:hover { transform: scale(1.03); z-index: 2; }
+        /* Galeria para 16 Fotos (Bordas mais arredondadas e sombras quentes) */
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .galeria img { width: 100%; height: 300px; object-fit: cover; border-radius: 20px; border: 5px solid white; box-shadow: 0 12px 25px rgba(136, 14, 79, 0.15); transition: all 0.4s; }
+        .galeria img:hover { transform: scale(1.05) translateY(-5px); z-index: 2; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.25); }
 
-        /* Estilo dos Cards e Lista */
-        .card-amor { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(156, 39, 176, 0.1); text-align: left; border-left: 10px solid var(--lavanda); max-width: 700px; margin: 0 auto; }
-        .card-amor li { font-size: 1.2rem; margin-bottom: 15px; list-style: none; display: flex; align-items: center; }
-        .card-amor li::before { content: '💜'; margin-right: 15px; }
+        /* Estilo dos Cards (Translucidez e sombra romântica) */
+        .card-amor { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1); text-align: left; border-left: 10px solid var(--lavanda); max-width: 700px; margin: 0 auto; }
+        .card-amor li { font-size: 1.2rem; margin-bottom: 15px; list-style: none; display: flex; align-items: center; color: #5a189a; }
+        .card-amor li::before { content: '💖'; margin-right: 15px; font-size: 1.5rem; }
 
         /* Envelope Interativo */
         .envelope-wrapper { margin: 50px 0; perspective: 1000px; }
-        .envelope { width: 300px; height: 200px; background: var(--lilás-medio); margin: auto; position: relative; cursor: pointer; border-radius: 0 0 10px 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .envelope::before { content: ''; position: absolute; top: 0; left: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid var(--lavanda); transform-origin: top; transition: transform 0.6s; z-index: 2; }
-        .carta { position: absolute; bottom: 10px; left: 10px; right: 10px; background: white; height: 180px; padding: 20px; box-sizing: border-box; border-radius: 5px; transition: transform 0.6s; z-index: 1; overflow-y: auto; text-align: left; }
+        .envelope { width: 320px; height: 220px; background: var(--lilás-medio); margin: auto; position: relative; cursor: pointer; border-radius: 0 0 15px 15px; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.2); }
+        .envelope::before { content: ''; position: absolute; top: 0; left: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-top: 110px solid var(--lavanda); transform-origin: top; transition: transform 0.6s; z-index: 2; }
+        .carta { position: absolute; bottom: 10px; left: 10px; right: 10px; background: #fffaf0; height: 180px; padding: 25px; box-sizing: border-box; border-radius: 8px; transition: transform 0.6s; z-index: 1; overflow-y: auto; text-align: left; font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: #4a148c; }
         .aberto::before { transform: rotateX(180deg); }
-        .aberto .carta { transform: translateY(-130px); z-index: 3; height: auto; max-height: 350px; }
+        .aberto .carta { transform: translateY(-140px); z-index: 3; height: auto; max-height: 400px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); }
 
-        .qr-section img { width: 250px; border: 8px solid white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .qr-section img { width: 250px; border: 8px solid white; border-radius: 20px; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.15); transition: transform 0.3s; }
+        .qr-section img:hover { transform: scale(1.05); }
 
-        /* Áudio */
-        audio { margin-top: 20px; outline: none; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        /* Áudio Customizado */
+        audio { margin-top: 20px; outline: none; border-radius: 30px; box-shadow: 0 8px 25px rgba(216, 27, 96, 0.15); }
 
         /* Efeito de hover na caixa surpresa */
-        .caixa-container { cursor: pointer; transition: transform 0.3s; margin: 20px auto; display: inline-block; }
-        .caixa-container:hover { transform: scale(1.1); }
+        .caixa-container { cursor: pointer; transition: transform 0.3s; margin: 20px auto; display: inline-block; animation: pulsarCaixa 2s infinite; }
+        @keyframes pulsarCaixa {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
 
-        /* --- ESTILOS DO POP-UP (MODAL) DOS CUPONS --- */
+        /* --- ESTILOS DO POP-UP (MODAL) --- */
         .modal {
-            display: none; /* Escondido por padrão */
-            position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro transparente */
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(74, 20, 140, 0.6); backdrop-filter: blur(5px);
             justify-content: center; align-items: center;
         }
         .modal-conteudo {
-            background-color: var(--lilás-claro); padding: 30px; border-radius: 20px;
+            background-color: var(--lilás-claro); padding: 40px; border-radius: 25px;
             max-width: 90%; max-height: 90vh; overflow-y: auto; position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center;
-            animation: abrirPopUp 0.5s ease-out;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center;
+            animation: abrirPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes abrirPopUp {
             from { transform: scale(0.5); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         .fechar-modal {
-            position: absolute; top: 15px; right: 20px; color: var(--lilás-escuro);
-            font-size: 35px; font-weight: bold; cursor: pointer; transition: 0.3s;
+            position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro);
+            font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        .fechar-modal:hover { color: #000; transform: scale(1.2); }
-        .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
+        .fechar-modal:hover { color: #d81b60; transform: scale(1.2) rotate(90deg); }
+        .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
         
     </style>
 </head>
 <body>
 
+    <div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
+    <div class="coracao">✨</div><div class="coracao">❤️</div><div class="coracao">💜</div><div class="coracao">💖</div>
+
     <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
     <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
-    <div class="estrela"></div><div class="estrela"></div><div class="estrela"></div>
-    <div class="estrela"></div>
+    <div class="estrela"></div><div class="estrela"></div>
 
     <header class="capa">
         <h1>Feliz Aniversário!</h1>
@@ -199,49 +234,41 @@
         <p>Preparei alguns mimos para você. Clique na caixa para abrir!</p>
         
         <div class="caixa-container" onclick="abrirModal()">
-            <div id="icone-caixa" style="font-size: 6rem; margin: 0;">🎁</div>
-            <p style="font-weight: bold; color: var(--lilás-escuro); font-size: 1.2rem;">Toque para abrir!</p>
+            <div id="icone-caixa" style="font-size: 7rem; margin: 0; text-shadow: 0 10px 20px rgba(0,0,0,0.2);">🎁</div>
+            <p style="font-weight: bold; color: var(--lilás-escuro); font-size: 1.4rem; margin-top: 15px;">Toque para abrir!</p>
         </div>
     </section>
 
     <div id="meuModal" class="modal">
         <div class="modal-conteudo">
             <span class="fechar-modal" onclick="fecharModal()">&times;</span>
-            <h2 style="margin-top: 0; font-size: 2.5rem;">Seus Presentes! 🎉</h2>
-            <p>Clique em cada um para resgatar:</p>
+            <h2 style="margin-top: 0; font-size: 3rem; color: #880e4f;">Seus Presentes! 🎉</h2>
+            <p style="font-size: 1.3rem; color: #4a148c;">Clique em cada um para resgatar:</p>
             
             <div class="grid-modal-cupons">
                 <a href="COLOQUE_O_LINK_AQUI" target="_blank">
-                    <img src="cupom1.png" alt="Cupom 1" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="cupom1.png" alt="Cupom 1" style="width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
-                
                 <a href="COLOQUE_O_LINK_AQUI" target="_blank">
-                    <img src="cupom2.png" alt="Cupom 2" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="cupom2.png" alt="Cupom 2" style="width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
-                
                 <a href="COLOQUE_O_LINK_AQUI" target="_blank">
-                    <img src="cupom3.png" alt="Cupom 3" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="cupom3.png" alt="Cupom 3" style="width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
-                
                 <a href="COLOQUE_O_LINK_AQUI" target="_blank">
-                    <img src="cupom4.png" alt="Cupom 4" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="cupom4.png" alt="Cupom 4" style="width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Função para abrir o pop-up
         function abrirModal() {
             document.getElementById("meuModal").style.display = "flex";
         }
-
-        // Função para fechar o pop-up no X
         function fecharModal() {
             document.getElementById("meuModal").style.display = "none";
         }
-
-        // Fecha o pop-up se a pessoa clicar fora da caixa branca
         window.onclick = function(event) {
             var modal = document.getElementById("meuModal");
             if (event.target == modal) {
@@ -249,5 +276,7 @@
             }
         }
     </script>
+</body>
+</html>
 </body>
 </html>
