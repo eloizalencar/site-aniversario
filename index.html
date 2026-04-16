@@ -111,8 +111,9 @@
         /* --- CORREÇÃO DA CAPA PARA O CELULAR --- */
         @media (max-width: 768px) {
             .capa {
-                background-attachment: scroll; /* Tira o zoom gigante no celular */
-                background-position: top center; /* Foca nos rostos na parte de cima da foto */
+                height: 65vh; /* Ajuste crítico: Reduz a altura para a foto não estourar no zoom */
+                background-attachment: scroll; /* Desliga o efeito "fixed" que quebra a proporção no iOS/Android */
+                background-position: top center; /* Foca nos rostos de vocês e do cachorro */
             }
         }
 
@@ -225,8 +226,10 @@
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(74, 20, 140, 0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
         .modal-conteudo { background-color: var(--lilás-claro); padding: 40px; border-radius: 25px; max-width: 90%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; animation: abrirPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes abrirPopUp { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; }
+        .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10001; }
         .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
+        
+        /* Estilos originais para manter as imagens clicáveis na grade */
         .grid-modal-cupons img { cursor: zoom-in; width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .grid-modal-cupons img:hover { transform: scale(1.05); }
 
@@ -437,6 +440,7 @@
         function abrirModal() { document.getElementById("meuModal").style.display = "flex"; }
         function fecharModal() { document.getElementById("meuModal").style.display = "none"; }
         
+        /* O usuário deve clicar fora da caixa, ou no x para fechar */
         window.onclick = function(event) { 
             let modal = document.getElementById("meuModal");
             if (event.target == modal) { fecharModal(); }
@@ -444,12 +448,14 @@
 
         /* --- LÓGICA PARA O NOVO ZOOM DOS CUPONS --- */
         function ampliarCupom(imagemClicada) {
-            // Pega a URL da imagem clicada e joga na tela de Zoom gigante
+            // Pega a URL da imagem clicada (ex: v1.png) e joga na tela de Zoom gigante
             document.getElementById('zoomImg').src = imagemClicada.src;
+            // Mostra o Modal de Zoom
             document.getElementById('zoomModal').style.display = 'flex';
         }
         
         function fecharZoom() {
+            // Esconde a tela de Zoom gigante quando clica nela
             document.getElementById('zoomModal').style.display = 'none';
         }
 
