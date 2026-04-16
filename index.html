@@ -20,8 +20,8 @@
             margin: 0; padding: 0; 
             
             /* --- IMAGEM DE FUNDO AQUI --- */
-            background-image: url('fundo.png'); /* Suba a sua imagem de corações/glitter com esse nome! */
-            background-color: #f3e5f5; /* Cor de segurança caso a imagem demore a carregar */
+            background-image: url('fundo.png'); 
+            background-color: #f3e5f5; 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -29,14 +29,13 @@
             color: #4a148c; overflow-x: hidden; position: relative; 
         }
 
-        /* Película protetora para garantir que o texto dê pra ler mesmo com fundo chamativo */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.45); /* Clareia a imagem de fundo em 45% */
+            background: rgba(255, 255, 255, 0.45); 
             z-index: -2; pointer-events: none;
         }
 
-        /* --- ANIMAÇÕES DE FUNDO (Corações e Brilhos Restaurados!) --- */
+        /* --- ANIMAÇÕES DE FUNDO --- */
         .coracao {
             position: absolute; font-size: 1.5rem;
             color: rgba(136, 14, 79, 0.25); 
@@ -60,7 +59,6 @@
             50% { opacity: 0.8; transform: scale(1.5); }
         }
 
-        /* Posições dos Elementos Mágicos */
         .coracao:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; font-size: 2rem; }
         .coracao:nth-child(2) { left: 30%; animation-duration: 12s; animation-delay: 2s; font-size: 1.2rem; }
         .coracao:nth-child(3) { left: 50%; animation-duration: 18s; animation-delay: 4s; font-size: 2.5rem; }
@@ -79,7 +77,6 @@
         .brilho:nth-child(15) { top: 60%; left: 75%; animation-duration: 2.8s; }
         .brilho:nth-child(16) { top: 80%; left: 35%; animation-duration: 3.2s; }
 
-        /* Estrelas Cadentes */
         @keyframes estrelaCadente {
             0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
             100% { transform: translateX(-1200px) translateY(1200px) rotate(-45deg); opacity: 0; }
@@ -97,7 +94,7 @@
         .estrela:nth-child(18) { top: 45%; left: 95%; animation-delay: 2s; }
         .estrela:nth-child(19) { top: 85%; left: 70%; animation-delay: 1s; animation-duration: 3s; }
 
-        /* Capa Gigante */
+        /* Capa Gigante - Configuração base (PC) */
         .capa { 
             height: 100vh; width: 100%;
             background: linear-gradient(rgba(136, 14, 79, 0.3), rgba(74, 20, 140, 0.4)), url('capa.jpeg'); 
@@ -108,13 +105,24 @@
         .capa h1 { font-family: 'Dancing Script', cursive; font-size: clamp(4rem, 12vw, 7rem); margin: 0; text-shadow: 4px 4px 15px rgba(0,0,0,0.6); }
         .capa p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
 
-        /* --- CORREÇÃO DA CAPA PARA O CELULAR --- */
+        /* --- CORREÇÃO DEFINITIVA DA CAPA PARA O CELULAR --- */
         @media (max-width: 768px) {
             .capa {
-                height: 65vh; /* Ajuste crítico: Reduz a altura para a foto não estourar no zoom */
-                background-attachment: scroll; /* Desliga o efeito "fixed" que quebra a proporção no iOS/Android */
-                background-position: top center; /* Foca nos rostos de vocês e do cachorro */
+                height: 95vh; /* Volta a ocupar a tela quase toda */
+                background-attachment: scroll !important; /* Desliga o zoom bizarro do iPhone */
+                background-position: center 20% !important; /* Foca nos rostos de vocês na parte de cima */
+                
+                /* Joga o texto para a parte de BAIXO da foto, liberando os rostos */
+                justify-content: flex-end;
+                padding-bottom: 12vh;
+                box-sizing: border-box;
+                
+                /* Escurece SÓ A PARTE DE BAIXO da foto para o texto branco dar leitura */
+                background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(74, 20, 140, 0.85) 100%), url('capa.jpeg') !important;
+                background-size: cover !important;
             }
+            .capa h1 { font-size: 4rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+            .capa p { font-size: 1.4rem; padding: 0 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
         }
 
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
@@ -154,7 +162,6 @@
         }
         .galeria img:hover { transform: scale(1.05) translateY(-5px); z-index: 2; }
         
-        /* Efeito quando a foto está tocando música */
         .tocando {
             transform: scale(1.05) translateY(-5px);
             box-shadow: 0 0 30px var(--lilás-escuro) !important;
@@ -172,16 +179,15 @@
         .card-amor li { font-size: 1.2rem; margin-bottom: 15px; list-style: none; display: flex; align-items: flex-start; color: #5a189a; line-height: 1.4; }
         .card-amor li::before { content: '💖'; margin-right: 15px; font-size: 1.3rem; flex-shrink: 0; }
 
-        /* --- NOVO ENVELOPE GIGANTE E CARTA ESCONDIDA --- */
+        /* Envelope Gigante */
         .envelope-wrapper { margin: 50px auto; max-width: 650px; width: 95%; perspective: 1000px; }
         .envelope { 
-            width: 100%; height: 320px; /* Mais alto! */
-            background: #d49ec2; /* Cor interna mais escura */
+            width: 100%; height: 320px; 
+            background: #d49ec2; 
             margin: auto; position: relative; cursor: pointer; border-radius: 0 0 15px 15px; 
             box-shadow: 0 20px 40px rgba(136, 14, 79, 0.3); 
         }
         
-        /* A Frente do envelope (Esconde a carta) */
         .envelope::after { 
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--lilás-medio); 
@@ -189,7 +195,6 @@
             z-index: 3; pointer-events: none; border-radius: 0 0 15px 15px;
         }
 
-        /* A Aba de Cima (Abre e Fecha) */
         .envelope::before { 
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--lavanda); 
@@ -197,25 +202,16 @@
             transform-origin: top; transition: transform 0.6s; z-index: 4; 
         }
 
-        /* A Carta (Maior e mais larga) */
         .carta { 
             position: absolute; bottom: 10px; left: 2.5%; width: 95%; 
             background: #fffaf0; height: 300px; padding: 35px; box-sizing: border-box; 
             border-radius: 10px; transition: transform 0.8s ease-in-out, max-height 0.8s; 
-            z-index: 2; /* Fica ESCONDIDA atrás da frente do envelope (z-index 3) */
-            overflow: hidden; text-align: left; font-size: 1.15rem; color: #4a148c; line-height: 1.6; 
+            z-index: 2; overflow: hidden; text-align: left; font-size: 1.15rem; color: #4a148c; line-height: 1.6; 
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        /* Quando Clica e Abre */
-        .envelope.aberto::before { transform: rotateX(180deg); z-index: 1; }
-        .envelope.aberto .carta { 
-            transform: translateY(-220px); /* Pula bem alto para fora do envelope */
-            z-index: 5; /* Vem para a frente de tudo */
-            height: auto; max-height: 800px; /* Fica compridona para caber o texto */
-            overflow-y: auto; padding-bottom: 50px;
-        }
-        /* ----------------------------------------------- */
+        .aberto::before { transform: rotateX(180deg); z-index: 1; }
+        .aberto .carta { transform: translateY(-220px); z-index: 5; height: auto; max-height: 800px; overflow-y: auto; padding-bottom: 50px; }
 
         .qr-section img { width: 250px; border: 8px solid white; border-radius: 20px; box-shadow: 0 15px 35px rgba(136, 14, 79, 0.15); }
         audio { margin-top: 20px; outline: none; border-radius: 30px; }
@@ -229,11 +225,10 @@
         .fechar-modal { position: absolute; top: 15px; right: 25px; color: var(--lilás-escuro); font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10001; }
         .grid-modal-cupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
         
-        /* Estilos originais para manter as imagens clicáveis na grade */
         .grid-modal-cupons img { cursor: zoom-in; width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.3s; }
         .grid-modal-cupons img:hover { transform: scale(1.05); }
 
-        /* --- NOVO ZOOM DOS CUPONS TOTALMENTE INDEPENDENTE --- */
+        /* ZOOM DOS CUPONS TOTALMENTE INDEPENDENTE */
         #zoomModal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 999999; 
@@ -246,7 +241,7 @@
         }
         @keyframes abrirZoom { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* --- NOVA SEÇÃO: CHAMADA WHATSAPP OFICIAL --- */
+        /* Chamada WhatsApp */
         .whatsapp-section {
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
             padding: 50px 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(37, 211, 102, 0.2);
@@ -440,7 +435,6 @@
         function abrirModal() { document.getElementById("meuModal").style.display = "flex"; }
         function fecharModal() { document.getElementById("meuModal").style.display = "none"; }
         
-        /* O usuário deve clicar fora da caixa, ou no x para fechar */
         window.onclick = function(event) { 
             let modal = document.getElementById("meuModal");
             if (event.target == modal) { fecharModal(); }
@@ -448,14 +442,11 @@
 
         /* --- LÓGICA PARA O NOVO ZOOM DOS CUPONS --- */
         function ampliarCupom(imagemClicada) {
-            // Pega a URL da imagem clicada (ex: v1.png) e joga na tela de Zoom gigante
             document.getElementById('zoomImg').src = imagemClicada.src;
-            // Mostra o Modal de Zoom
             document.getElementById('zoomModal').style.display = 'flex';
         }
         
         function fecharZoom() {
-            // Esconde a tela de Zoom gigante quando clica nela
             document.getElementById('zoomModal').style.display = 'none';
         }
 
@@ -488,4 +479,5 @@
         }
     </script>
 </body>
+</html>
 </html>
